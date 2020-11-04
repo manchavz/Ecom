@@ -28,9 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -40,17 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'store.apps.StoreConfig',
     'accounts',
-    'social_django',
     'crispy_forms',
     'rest_framework'
 ]
 
-AUTHENTICATION_BACKENDS = (
-    'social_core.backends.github.GithubOAuth2',
-    'social_core.backends.google.GoogleOAuth2',
-    'social_core.backends.facebook.FacebookOAuth2',
-    'django.contrib.auth.backends.ModelBackend',
-)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -60,7 +51,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'ecommerce.urls'
@@ -96,7 +86,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -144,15 +133,8 @@ MEDIA_URL = '/images/'
 MEDIA_ROOT = os.path.join(STATIC_DIR,'images')
 print(MEDIA_ROOT)
 
-SOCIAL_AUTH_URL_NAMESPACE = 'social'
-SOCIAL_AUTH_URL_NAMESPACE = "social"
-
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 LOGIN_URL = ''
 LOGOUT_URL = 'store/'
 
 LOGIN_REDIRECT_URL = 'store'
-
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '566463432078-j9d7ick4qsl8tltc87up7juf34t4q06p.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '2UjmE-lYmCyUEARQuHOTHSyc'

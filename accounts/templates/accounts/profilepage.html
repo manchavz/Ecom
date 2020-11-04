@@ -21,7 +21,6 @@
                     <h2 class="mb-3">{{user.first_name}} {{user.last_name}}</h2>
                     <div class="row">
                         <div class="col-md-6">
-							<p><strong>Date Of Birth: </strong>{{user.profile.dob}}</p>
 							<p><strong>E-Mail: </strong>{{user.email}}</p>
                         </div>
                     </div>
@@ -74,9 +73,5 @@
 			<br>
 		{% endif %}
 	</div>
-	<br><br>
-	<blockquote class="blockquote text-center">
-		<p class="mb-0">** That's it! **</p>
-		<footer class="blockquote-footer"> You've scrolled to the end of the List!</footer>
-	</blockquote>
+	<hr>
 {% endblock %}

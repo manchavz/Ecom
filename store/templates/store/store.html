@@ -1,24 +1,19 @@
 {% extends 'store/main.html' %}
 {% load static %}
 {% block content %}
+	<!-- Mostrar los productos a la venta -->
 	<div class="row">
 		{% for product in product_categories %}
 			<div class="col-lg-4">
+				<!-- Imagen del Producto -->
 				<img class="thumbnail" src="{{ product.get_imageURL }}">
 				<div class="box-element product">
 					<h6><strong>{{product.name}}</strong></h6>
 					<hr>
-					<a class="btn btn-outline-success" href="{% url 'show_items' product.id %}">View Items</a>
-
+					<a class="btn btn-outline-success" href="{% url 'show_items' product.id %}">Ver Items</a>
 				</div>
 			</div>
 		{% endfor %}
 	</div>
-
-	<br><br>
-	<blockquote class="blockquote text-center">
-		<p class="mb-0">** That's it! **</p>
-		<footer class="blockquote-footer"> You've scrolled to the end of the List!</footer>
-	</blockquote>
-
+	<hr>
 	{% endblock content %}
