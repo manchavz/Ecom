@@ -1,5 +1,6 @@
 {% extends 'store/main.html' %}
 {% load static %}
+{% load humanize %}
 {% load crispy_forms_tags %}
 {% block content %}
 	<hr>
@@ -16,12 +17,12 @@
 					<div class="cart-row" style="background-color: lightyellow;height: 80px">
 						<div style="flex:2"><a href="{% url 'item_detail' item.product.id %}"><img class="row-image" src="{{ item.product.get_imageURL }}" style="width: 80px; height: 80px;margin-left: 20px"></a></div>
 						<div style="flex:2"><p>{{item.product.name}}</p></div>
-						<div style="flex:1"><p>&#8370;{{item.product.price|floatformat:2}}</p></div>
+						<div style="flex:1"><p>&#8370;{{item.product.price | intcomma}}</p></div>
 						<div style="flex:1"><p>x{{item.quantity}}</p></div>
 					</div>
 				{% endfor %}
 				<h5>Items:   {{total_item_cart}}</h5>
-				<h5>Total:   &#8370;{{total_cost_cart}}</h5>
+				<h5>Total:   &#8370;{{total_cost_cart | intcomma}}</h5>
 			</div>
 		</div>
 	    <!-- Pago de Items via AdamsPay -->

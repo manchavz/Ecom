@@ -1,5 +1,6 @@
 {% extends 'store/main.html' %}
 {% load static %}
+{% load humanize %}
 {% block content %}
 	{% if total_item_cart %}
 		<h2>Shopping Cart</h2>
@@ -18,7 +19,7 @@
 				<table class="table" style="background-color: lightyellow">
 					<tr>
 						<th><h5>Items: <strong>{{total_item_cart}}</strong></h5></th>
-						<th><h5>Total:<strong> &#8370;{{total_cost_cart}}</strong></h5></th>
+						<th><h5>Total:<strong> &#8370;{{total_cost_cart | intcomma}}</strong></h5></th>
 						<th>
 							{% if check %}
 								<a  style="float:right; margin:5px;" class="btn btn-success" href="{% url 'checkout' %}">Checkout</a>
@@ -42,7 +43,7 @@
 						<div class="cart-row" style="background-color: lightyellow; height: 80px">
 							<div style="flex:2"><a href="{% url 'item_detail' item.product.id %}"><img class="row-image" src="{{item.product.get_imageURL}}" style="width: 80px; height: 80px;margin-left: 20px"></a></div>
 							<div style="flex:2"><p>{{item.product.name}}</p></div>
-							<div style="flex:1"><p>&#8370;{{item.product.price}}</p></div>
+							<div style="flex:1"><p>&#8370;{{item.product.price | intcomma}}</p></div>
 							<div style="flex:1">
 								<p class="quantity">{{item.quantity}}</p>
 								<div class="quantity">
@@ -51,7 +52,7 @@
 									<img action ="remove" product_id ="{{item.product.id}}" class="update_cart_quantity chg-quantity " src="{% static  'images/arrow-down.png' %}">
 								</div>
 							</div>
-							<div style="flex:1"><p>&#8370;{{item.get_total}}</p></div>
+							<div style="flex:1"><p>&#8370;{{item.get_total | intcomma}}</p></div>
 						</div>
 					{% endfor %}
 				</div>

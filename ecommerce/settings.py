@@ -36,8 +36,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
+
     'store.apps.StoreConfig',
-    'accounts',
+    'accounts.apps.AccountsConfig',
     'crispy_forms',
     'rest_framework'
 ]

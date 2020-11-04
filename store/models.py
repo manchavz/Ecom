@@ -66,7 +66,7 @@ class Purchased_item(models.Model):
     order = models.ForeignKey(FullOrder,on_delete=models.CASCADE,null=True)
     quantity = models.IntegerField(default=0, blank=True, null=True)
     name = models.CharField(max_length=100, blank=False, name=False)
-    price = models.FloatField(blank=False, null=True)
+    price = models.IntegerField(blank=False, null=True)
     image = models.ImageField(null=True, blank=True)
     description = models.TextField(null=True, blank=True)
 

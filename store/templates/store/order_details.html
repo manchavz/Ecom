@@ -1,4 +1,5 @@
 {% extends 'store/main.html' %}
+{% load humanize %}
 {% block content %}
     <h3>Compras Realizadas: </h3>
     <hr>
@@ -17,18 +18,18 @@
                             </div>
                             <div style="flex:1">
                                 <strong>Total</strong>
-                                <h6>&#8377;{{order.order.amount}}</h6>
+                                <h6>&#8377;{{order.order.amount | intcomma}}</h6>
                             </div>
                         </div>
                     {% for item in order.items %}
                         <div class="cart-row" style="background-color: lightblue;height: 80px">
                             <div style="flex:1"><img style="width: 80px; height: 80px;margin-left: 20px" class="row-image" src="{{item.get_imageURL}}"></div>
                             <div style="flex:1"><p>Producto:{{item.name}}</p></div>
-                            <div style="flex:1"><p>Precio:&#8377;{{item.price}}</p></div>
+                            <div style="flex:1"><p>Precio:&#8377;{{item.price | intcomma}}</p></div>
                             <div style="flex:1">
                                 <p class="quantity">Cantidad:{{item.quantity}}</p>
                             </div>
-                            <div style="flex:1"><p>Total:${{item.get_total}}</p></div>
+                            <div style="flex:1"><p>Total:${{item.get_total | intcomma}}</p></div>
                         </div>
                     {% endfor %}
                 </div>

@@ -1,5 +1,6 @@
 {% extends 'store/main.html' %}
-{% load static%}
+{% load static %}
+{% load humanize %}
 {% block content %}
     <div class="row my-2">
         <!-- Imagen del Producto -->
@@ -11,7 +12,7 @@
             <div class="tab-content py-4">
                 <div class="tab-pane active" id="profile">
                     <h3 class="mb-3">{{product.name}}</h3>
-                    <h4 class="mb-3">${{product.price}}</h4>
+                    <h4 class="mb-3">${{product.price | intcomma}}</h4>
                     <div class="row">
                         <div class="col-md-6">
                         <!-- <p><strong>Description: </strong>{{product.description}}</p>-->
