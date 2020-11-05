@@ -6,30 +6,30 @@
     <div>
         {% if request.user.is_authenticated %}
             {% for order in ordered %}
-                <div class="box-element" style="background-color: lightgray">
+                <div class="box-element lightgray-theme-color">
                         <div class="cart-row">
-                            <div style="flex:1">
+                            <div class="cart-item-div-1">
                                 <strong>Orden Realizada</strong>
                                 <h6>{{ order.order.date_ordered | date:"d M Y"}} </h6>
                             </div>
-                            <div style="flex:1">
+                            <div class="cart-item-div-1">
                                 <strong>Id de la Transaccion</strong>
                                 <h6>{{order.order.transaction_id}}</h6>
                             </div>
-                            <div style="flex:1">
+                            <div class="cart-item-div-1">
                                 <strong>Total</strong>
                                 <h6>&#8377;{{order.order.amount | intcomma}}</h6>
                             </div>
                         </div>
                     {% for item in order.items %}
-                        <div class="cart-row" style="background-color: lightblue;height: 80px">
-                            <div style="flex:1"><img style="width: 80px; height: 80px;margin-left: 20px" class="row-image" src="{{item.get_imageURL}}"></div>
-                            <div style="flex:1"><p>Producto:{{item.name}}</p></div>
-                            <div style="flex:1"><p>Precio:&#8377;{{item.price | intcomma}}</p></div>
-                            <div style="flex:1">
+                        <div class="cart-row cart-order-details">
+                            <div class="cart-item-div-1"><img class="row-image image-checkout" src="{{item.get_imageURL}}"></div>
+                            <div class="cart-item-div-1"><p>Producto:{{item.name}}</p></div>
+                            <div class="cart-item-div-1"><p>Precio:&#8377;{{item.price | intcomma}}</p></div>
+                            <div class="cart-item-div-1">
                                 <p class="quantity">Cantidad:{{item.quantity}}</p>
                             </div>
-                            <div style="flex:1"><p>Total:${{item.get_total | intcomma}}</p></div>
+                            <div class="cart-item-div-1"><p>Total:${{item.get_total | intcomma}}</p></div>
                         </div>
                     {% endfor %}
                 </div>

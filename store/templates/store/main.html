@@ -11,10 +11,11 @@
 		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-		<script src="https://maxscdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
 		<!-- Archivos locales CSS -->
 		<link rel="stylesheet" type="text/css" href="{% static 'store/css/main.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'accounts/style.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'store/style.css' %}">
 		<!-- Extraer el nombre del usuario que inicio sesion -->
 		<script type="text/javascript">
 			var user = '{{request.user}}'
@@ -22,7 +23,7 @@
 	</head>
 	<body>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		  <h5><strong><a class="navbar-brand" href="{% url 'store' %}" style="color: white">Ecommerce</a></strong></h5>
+		  <h5><strong><a class="navbar-brand white-theme-color" href="{% url 'store' %}">Ecommerce</a></strong></h5>
 		  <!-- Boton Colapsable, pagina 'responsive' -->
 		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
@@ -30,27 +31,27 @@
 		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 			  <li class="nav-item active">
-				<h5><strong><a class="nav-link" href="{% url 'store' %}" style="color: white">Tienda<span class="sr-only">(current)</span></a></strong></h5>
+				<h5><strong><a class="nav-link white-theme-color" href="{% url 'store' %}">Tienda<span class="sr-only">(current)</span></a></strong></h5>
 			  </li>
 			</ul>
 			<div class="form-inline my-2 my-lg-0">
 				<!-- ADD STYLE INTO A CSS FILE IN STATIC FOLDER	-->
 				<!-- Si el usuario esta autenticado, mostrar: Detalles de la orden, Cerrar Sesion -->
 				{% if request.user.is_authenticated %}
-					<h5 class="mr-sm-3"><strong><a href="{% url 'order_details' %}" style="color: white">Ordenes de Compra</a></strong></h5>
-					<h5 class="mr-sm-3"><strong><a href="{% url 'user_logout' %}" style="color: white">Logout</a></strong></h5>
+					<h5 class="mr-sm-3"><strong><a href="{% url 'order_details' %}" class="white-theme-color">Ordenes de Compra</a></strong></h5>
+					<h5 class="mr-sm-3"><strong><a href="{% url 'user_logout' %}" class="white-theme-color">Logout</a></strong></h5>
 				<!-- Si el usuario inicio sesion: mostrar la foto de perfil-->
 				{% if request.user.profile.photo %}
 						<a href="{% url 'profilepage' username=user.username %}"><img class="mr-sm-1" src="{{ request.user.profile.photo.url }}" width="35" height="35"></a>
 					{% else %}
-						<a href="{% url 'profilepage' username=user.username %}"><img class="mr-sm-1" src="/static/images/default.png" width="35" , height="35"></a>
+						<a href="{% url 'profilepage' username=user.username %}"><img class="mr-sm-1" src="/static/images/default.png" width="35", height="35"></a>
 					{% endif %}
-					<h5><strong><a href="{% url 'profilepage' username=request.user.username %}" style="color: white">{{request.user.username}}</a></strong></h5>
+					<h5><strong><a href="{% url 'profilepage' username=request.user.username %}" class="white-theme-color">{{request.user.username}}</a></strong></h5>
 				<!-- Si el usuario no ha iniciado sesion: mostrar Iniciar sesion, Registrarse  -->
 				{% else %}
-					<h5 class="mr-sm-3"><strong><a href="{% url 'user_login' %}" style="color: white">Login</a></strong></h5>
+					<h5 class="mr-sm-3"><strong><a href="{% url 'user_login' %}" class="white-theme-color">Login</a></strong></h5>
 					<div>
-						<h5 class="mr-sm-3"><strong><a href="{% url 'register' %}" style="color: white">Registrarse</a></strong></h5>
+						<h5 class="mr-sm-3"><strong><a href="{% url 'register' %}" class="white-theme-color">Registrarse</a></strong></h5>
 					</div>
 				{% endif %}
 				<!-- Carrito de Compras -->
@@ -74,7 +75,6 @@
 		</div>
 		<!-- Bootstrap4 Javascript -->
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-		<script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
 		<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 		<!-- Static Dir Javascript -->
 		<script type="text/javascript" src="{% static 'store/js/main.js' %}"></script>
@@ -82,6 +82,6 @@
 	</body>
 	<footer class="footer">
 		<!-- PONER ESTILO EN MAIN.CSS STATIC FOLDER -->
-		<p style="text-align: center;">Ecom © 2020</p>
+		<p class="text-align-center">Ecom © 2020</p>
 	</footer>
 </html>

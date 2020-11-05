@@ -2,7 +2,7 @@
 {% load static %}
 {% load humanize %}
 {% block content %}
-	<h1 style="text-align: center;">{{product_category.name}}</h1>
+	<h1 class="h1-format">{{product_category.name}}</h1>
 	<div class="row">
 		{% for product in products %}
 			<div class="col-lg-4">
@@ -12,10 +12,10 @@
 					<hr>
 					<button  class="update_cart btn btn-outline-secondary add-btn" product_id ="{{product.id}}">Add to Cart</button>
 					<a class="btn btn-outline-success" href="{% url 'item_detail' product.id %}">View</a>
-					<h4 style="display: inline-block; float: right"><strong>&#8370;{{product.price | intcomma}}</strong></h4>
+					<h4 class="h4-format"><strong>&#8370;{{product.price | intcomma}}</strong></h4>
 				</div>
 			</div>
 		{% endfor %}
 	</div>
 	<hr>
-	{% endblock content %}
+{% endblock content %}

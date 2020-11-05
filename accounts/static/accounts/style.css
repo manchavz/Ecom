@@ -1,0 +1,26 @@
+/* CSS Personalizado para toda la 'accounts-App' */
+
+/* edit_profile CSS */
+.h1-account-format{
+    text-align: center;
+}
+
+/* profilepage CSS */
+.lightgray-color-theme{
+    background-color: lightgray;
+}
+
+.div-style-1{
+    flex:1;
+}
+
+.div-items-theme{
+    background-color: lightblue;
+    height: 80px;
+}
+
+.image-format{
+    width: 80px;
+    height: 80px;
+    margin-left: 20px;
+}

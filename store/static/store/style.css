@@ -1,0 +1,78 @@
+/* CSS Personalizado para toda la 'store-App' */
+
+/* Cart CSS*/
+.cart-table {
+    background-color: white;
+}
+
+.cart-button{
+    float:right;
+    margin:5px;
+}
+
+.cart-item-detailed-purchase{
+    background-color: white;
+}
+
+.cart-item-description-box {
+    background-color: white;
+    height: 80px;
+}
+
+.cart-item-div-2{
+    flex:2;
+}
+
+.cart-item-div-1{
+    flex:1;
+}
+
+/* Checkout CSS*/
+.item-checkout-2 {
+    flex:2;
+}
+
+.item-checkout-1 {
+    flex:1;
+}
+
+.cart-checkout {
+    background-color: white;
+    height: 80px;
+}
+
+.image-checkout {
+    width: 80px;
+    height: 80px;
+    margin-left: 20px;
+}
+
+/* main CSS */
+.white-theme-color{
+   color: white;
+}
+
+.text-align-center {
+    text-align: center;
+}
+
+/* Order Details CSS */
+.lightgray-theme-color{
+    background-color: lightgray;
+}
+
+.cart-order-details{
+    background-color: lightblue;
+    height: 80px;
+}
+
+/* Show Items CSS*/
+.h1-format{
+    text-align: center;
+}
+
+.h4-format{
+    display: inline-block;
+    float: right;
+}
+

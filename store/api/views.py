@@ -1,6 +1,5 @@
 from store.models import Product, OrderItem, FullOrder, Purchased_item
 from store.models import ProductCategories
-from django.http import JsonResponse
 from .serializers import (
     ProductCategorySerializer,
     OrderItemSerializer,
@@ -18,7 +17,6 @@ from django.core import serializers
 
 class Store(APIView):
     def get(self, request):
-
         total_item_cart = 0
 
         if request.user.is_authenticated:

@@ -1,4 +1,6 @@
 {% extends 'store/main.html' %}
+{% load static %}
+{% load humanize %}
 {% block content %}
     <div class="row my-2">
 		<div class="col-lg-4 order-lg-1 text-center">
@@ -30,41 +32,34 @@
 	</div>
 	<hr class="my-4">
 	<hr class="my-4">
-	<h3>Ordered Items : </h3>
+	<h3>Items Ordenados: </h3>
 	<div>
 		{% if request.user.is_authenticated %}
 			{% for order in ordered %}
-				<div class="box-element" style="background-color: lightgray" ">
+				<div class="box-element lightgray-color-theme">
 						<div class="cart-row">
-							<div style="flex:1">
-								<strong>Order Placed</strong>
+							<div class="div-style-1">
+								<strong>Fecha de orden realizada</strong>
 								<h6>{{ order.order.date_ordered | date:"d M Y"}} </h6>
 							</div>
-							<div style="flex:1">
-								<strong>Transaction Id</strong>
+							<div class="div-style-1">
+								<strong>Id de la Transaccion</strong>
 								<h6>{{order.order.transaction_id}}</h6>
 							</div>
-							<div style="flex:1">
+							<div class="div-style-1">
 								<strong>Total</strong>
-								<h6>&#8377;{{order.order.amount}}</h6>
-							</div>
-							<div style="flex:1">
-								<strong>Shipped to :</strong>
-								<div>{{order.order.recepient_fullname}}({{order.order.phone_no}})</div>
-								<div>{{order.order.address_line1}}, {{order.order.address_line2}}</div>
-								<div>{{order.order.city}},{{order.order.state}},{{order.order.country}}</div>
-								<div>{{order.order.zipcode}}</div>
+								<h6>&#8370;{{order.order.amount | intcomma}}</h6>
 							</div>
 						</div>
 					{% for item in order.items %}
-						<div class="cart-row" style="background-color: lightblue;height: 80px">
-							<div style="flex:1"><img style="width: 80px; height: 80px;margin-left: 20px" class="row-image" src="{{item.get_imageURL}}"></div>
-							<div style="flex:1"><p>Product :{{item.name}}</p></div>
-							<div style="flex:1"><p>Price :&#8377;{{item.price}}</p></div>
-							<div style="flex:1">
-								<p class="quantity">Quantity :{{item.quantity}}</p>
+						<div class="cart-row div-items-theme">
+							<div class="div-style-1"><img class="row-image image-format" src="{{item.get_imageURL}}"></div>
+							<div class="div-style-1"><p>Producto:{{item.name}}</p></div>
+							<div class="div-style-1"><p>Precio:&#8370;{{item.price | intcomma}}</p></div>
+							<div class="div-style-1">
+								<p class="quantity">Cantidad:{{item.quantity}}</p>
 							</div>
-							<div style="flex:1"><p>Total :${{item.get_total}}</p></div>
+							<div class="div-style-1"><p>Total:&#8370;{{item.get_total | intcomma}}</p></div>
 						</div>
 					{% endfor %}
 				</div>
