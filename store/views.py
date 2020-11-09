@@ -267,7 +267,11 @@ def payment_api(request):
         debt = response_json["debt"]
         print("Deuda creada exitosamente")
         print("URL=" + debt["payUrl"])
-        context = {'status_de_transaccion': 'Tu pago a sido procesado. Gracias, esperamos volver a verlo pronto'}
+        context = {
+            'status_de_transaccion': 'Casi listo, procesando transaccion.',
+            'payUrl': debt["payUrl"],
+            'deuda_creada': True
+        }
         return render(request, "store/thankyou.html", context)
     else:
         print("# Error")
@@ -280,6 +284,6 @@ def payment_api(request):
         print("====================JSON====================")
         if "meta" in response_json:
             pp.pprint(response_json["meta"])
-        context = {'status_de_transaccion': 'Tu pago no pudo ser procesado. Intentelo nuevamente.'}
+        context = {'status_de_transaccion': 'No pudimos procesar tu transaccion.'}
         return render(request, "store/thankyou.html", context)
 
