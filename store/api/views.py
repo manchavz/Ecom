@@ -9,6 +9,8 @@ from .serializers import (
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 import datetime
+import requests
+from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status

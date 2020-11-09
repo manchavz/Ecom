@@ -4,12 +4,13 @@ from .models import ProductCategories
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponseRedirect, Http404
-from rest_framework import status
-from rest_framework.response import Response
 from django.urls import reverse
+from dotenv import load_dotenv
 import datetime
 import requests
-import json
+import pprint
+import os
+from . import services
 
 
 def store(request):
@@ -23,8 +24,8 @@ def store(request):
     product_categories = ProductCategories.objects.all()
 
     context = {
-        'product_categories' : product_categories,
-        'total_item_cart' : total_item_cart,
+        'product_categories': product_categories,
+        'total_item_cart': total_item_cart,
     }
     return render(request, 'store/store.html', context)
 
@@ -192,41 +193,6 @@ def order_details(request):
     return render(request, 'store/order_details.html', context)
 
 
-def make_payment(request):
-
-    if not request.user.is_authenticated:
-        return HttpResponseRedirect(reverse('user_login'))
-
-    dt = datetime.datetime.now()
-    seq = int(dt.strftime("%Y%m%d%H%M%S"))
-
-    obj = FullOrder.objects.create(user=request.user)
-
-    obj.transaction_id = seq
-    obj.save()
-
-    total_amount = 0
-
-    items = OrderItem.objects.all()
-    for item in items:
-        item_purchased = Purchased_item.objects.create(order = obj)
-        item_purchased.user = request.user
-        item_purchased.quantity = item.quantity
-        item_purchased.name = item.product.name
-        item_purchased.price = item.product.price
-        item_purchased.image = item.product.image
-        item_purchased.description = item.product.description
-        item_purchased.save()
-        total_amount += item.product.price * item.quantity
-
-        item.delete()
-
-    obj.amount = total_amount
-    obj.save()
-
-    return render(request, 'store/payment_success.html')
-
-
 def show_items(request, id):
     total_item_cart = 0
 
@@ -249,7 +215,71 @@ def show_items(request, id):
     return render(request, 'store/show_items.html', context)
 
 
-# Realizar Pago via AdamsPay -- boton
+# Realizar Pago via AdamsPay
 def payment_api(request):
-    return render(request, 'store/store.html')
+    # Usar 'environ variables' por motivos de seguridad
+    load_dotenv()
+    apikey = os.environ.get("apikey")
+    url = "https://staging.adamspay.com/api/v1/debts"
+    headers = {
+      'apikey': apikey,
+      'Content-Type': 'application/json'
+    }
+    # Hora en UTC!
+    inicio_validez = datetime.datetime.utcnow().replace()
+    fin_validez = inicio_validez + datetime.timedelta(days=2)
+    # Extraer Dinamicamente: Costo Total & Nombre del Item en el Carrito de Compras
+    total_cost_cart = 0
+    total_item_cart = 0
+    if request.user.is_authenticated:
+        items = OrderItem.objects.filter(user=request.user)
+        for item in items:
+            total_item_cart += item.quantity
+
+        for item in items:
+            total_cost_cart += item.get_total
+            # Extraer el nombre del item dinamicamente
+            # todo considerar casos de multiples items, pendiente
+            item_name = item.product.name
+
+        payload = {
+                    "debt": {
+                        # "docId": "", (OPCIONAL)
+                        "amount": {
+                            "currency": "PYG",
+                            "value": str(total_cost_cart)
+                        },
+                        "label": item_name,
+                        "slug": "Ecom850",
+                        "validPeriod": {
+                            "start": inicio_validez.strftime("%Y-%m-%dT%H:%M:%S"),
+                            "end": fin_validez.strftime("%Y-%m-%dT%H:%M:%S")
+                        }
+                    }
+                  }
+    # Respuesta del pedido POST
+    response = requests.post(url, headers=headers, json=payload)
+    # Serializar la respuesta a un formato JSON
+    response_json = response.json()
+    # Configurar Pretty Printer
+    pp = pprint.PrettyPrinter(indent=2)
+    if response.ok:
+        debt = response_json["debt"]
+        print("Deuda creada exitosamente")
+        print("URL=" + debt["payUrl"])
+        context = {'status_de_transaccion': 'Tu pago a sido procesado. Gracias, esperamos volver a verlo pronto'}
+        return render(request, "store/thankyou.html", context)
+    else:
+        print("# Error")
+        print("====================Status Code====================")
+        print(response.status_code)
+        print("====================Body====================")
+        print(response.text)
+        print("====================Payload:Raw====================")
+        print(payload)
+        print("====================JSON====================")
+        if "meta" in response_json:
+            pp.pprint(response_json["meta"])
+        context = {'status_de_transaccion': 'Tu pago no pudo ser procesado. Intentelo nuevamente.'}
+        return render(request, "store/thankyou.html", context)
 

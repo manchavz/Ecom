@@ -1,0 +1,12 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+    <h4>Gracias por elegir <strong>Ecom</strong></h4>
+    <p>{{status_de_transaccion}}</p>
+    <div class="container">
+        <div class="row">
+            <a href="{% url 'checkout' %}" class="btn btn-dark">Volver a Checkout</a>
+        </div>
+    </div>
+{% endblock %}

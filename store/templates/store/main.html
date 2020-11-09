@@ -35,10 +35,9 @@
 			  </li>
 			</ul>
 			<div class="form-inline my-2 my-lg-0">
-				<!-- ADD STYLE INTO A CSS FILE IN STATIC FOLDER	-->
 				<!-- Si el usuario esta autenticado, mostrar: Detalles de la orden, Cerrar Sesion -->
 				{% if request.user.is_authenticated %}
-					<h5 class="mr-sm-3"><strong><a href="{% url 'order_details' %}" class="white-theme-color">Ordenes de Compra</a></strong></h5>
+					<h5 class="mr-sm-3"><strong><a href="{% url 'order_details' %}" class="white-theme-color hidden">Ordenes de Compra</a></strong></h5>
 					<h5 class="mr-sm-3"><strong><a href="{% url 'user_logout' %}" class="white-theme-color">Logout</a></strong></h5>
 				<!-- Si el usuario inicio sesion: mostrar la foto de perfil-->
 				{% if request.user.profile.photo %}
