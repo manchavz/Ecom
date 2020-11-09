@@ -29,14 +29,17 @@
 			<div class="box-element" id="form-wrapper">
 				<div class="box-element" id="payment-info">
 					<small>Opciones de Pago via </small>
-					<button id="make-payment">AdamsPay</button>
+					<form action="{% url 'payment_api' %}" method="POST">
+						{% csrf_token %}
+						<button id="make-payment" type="submit">AdamsPay</button>
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
 	<hr>
 	<script type="text/javascript">
-	    document.getElementById('make-payment').addEventListener('click', function(e){
+	    document.getElementById('#').addEventListener('click', function(e){
 	    	submitFormData()
 	    })
 

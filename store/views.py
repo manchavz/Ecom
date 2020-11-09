@@ -4,8 +4,11 @@ from .models import ProductCategories
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponseRedirect, Http404
+from rest_framework import status
+from rest_framework.response import Response
 from django.urls import reverse
 import datetime
+import requests
 import json
 
 
@@ -244,3 +247,9 @@ def show_items(request, id):
         'total_item_cart': total_item_cart,
     }
     return render(request, 'store/show_items.html', context)
+
+
+# Realizar Pago via AdamsPay -- boton
+def payment_api(request):
+    return render(request, 'store/store.html')
+
