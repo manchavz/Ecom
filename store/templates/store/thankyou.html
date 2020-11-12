@@ -4,8 +4,20 @@
 {% block content %}
     {% if deuda_creada %}
         <h4>Gracias por elegir <strong>Ecom</strong></h4>
-        <p>{{status_de_transaccion}}</p>
-        <p>Finaliza el pago a traves del siguiente enlance: {{payUrl}}</p>
+        <p>Elije tu metodo de pago preferido:</p>
+        <div class="container">
+            <div class="row">
+                <div class="mx-auto">
+                    <iframe id="thank-you-frame"
+                            title="Metodo de Pago AdamsPay"
+                            allow="payment"
+                            width="600"
+                            height="380"
+                            src="{{payUrl}}">
+                    </iframe>
+                </div>
+            </div>
+        </div>
     {% else %}
     <h4><strong>Oops!</strong></h4>
         <div style="margin-bottom: 10px">
@@ -15,7 +27,9 @@
     {% endif %}
     <div class="container">
         <div class="row">
-            <a href="{% url 'checkout' %}" class="btn btn-dark">Volver a Checkout</a>
+            <div class="max-auto">
+                <a href="{% url 'checkout' %}" class="btn btn-dark thank-you-btn">Volver a Checkout</a>
+            </div>
         </div>
     </div>
 {% endblock %}

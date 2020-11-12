@@ -76,3 +76,13 @@
     float: right;
 }
 
+.thank-you-btn{
+    margin-top: 10px;
+    width: auto;
+}
+
+#thank-you-frame {
+    border: 1px solid black;
+    width: 100%;
+}
+

@@ -29,7 +29,7 @@
 			<div class="box-element" id="form-wrapper">
 				<div class="box-element" id="payment-info">
 					<small>Opciones de Pago via </small>
-					<form action="{% url 'payment_api' %}" method="POST">
+					<form action="{% url 'adamspay_api' %}" method="POST">
 						{% csrf_token %}
 						<button id="make-payment" type="submit">AdamsPay</button>
 					</form>
