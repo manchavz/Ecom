@@ -3,7 +3,8 @@ from .models import Product, OrderItem, FullOrder, Purchased_item
 from .models import ProductCategories
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect, HttpResponse, Http404
+from django.views.decorators.http import require_POST
 from django.urls import reverse
 import pprint
 from . import services
@@ -249,3 +250,8 @@ def payment_api(request):
         context = {'status_de_transaccion': 'No pudimos procesar tu transaccion.'}
         return render(request, "store/thankyou.html", context)
 
+
+@require_POST
+@csrf_exempt
+def webhook_api(request):
+    return HttpResponse("This is a webhook response.")

@@ -12,4 +12,5 @@ urlpatterns = [
     path('item_detail/<int:id>', views.item_detail, name='item_detail'),
     path('show_items/<int:id>', views.show_items, name='show_items'),
     path('adamspay_api/', views.payment_api, name='adamspay_api'),
+    path('example/', views.webhook_api),
 ]
